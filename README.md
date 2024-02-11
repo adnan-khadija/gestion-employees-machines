@@ -26,7 +26,7 @@ d'afficher le nombre de machines par année, et de traduire entre l'anglais et l
 
 1. Clonez le dépôt :
   
-    git clone [https://github.com/votre-utilisateur/votre-projet.git](https://github.com/adnan-khadija/Gestion-employees-application.git)
+    git clone https://github.com/adnan-khadija/gestion-employees-machines.git
  
 
 2. Importez le projet dans votre IDE et configurez-le selon votre environnement.
