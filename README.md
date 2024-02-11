@@ -42,12 +42,19 @@ d'afficher le nombre de machines par année, et de traduire entre l'anglais et l
 - Afficher le nombre de machines par année
 - Possibilité de traduire entre l'anglais et le français
 
+  ## Démonstration
+
+  
+
+https://github.com/adnan-khadija/gestion-employees-machines/assets/147508009/03b0e09b-0657-4a1c-9061-4e5bebec2b01
+
+
 
 ## Auteurs
 
 - [Khadija ADNAN](https://github.com/adnan-khadija)
 
-  ## Démonstration
+
 
   
 
