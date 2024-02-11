@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <title data-translate="machineFormTitle">Formulaire Machine</title>
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+    <nav>
+        <img src="https://images.careerbuilder.vn/employers_pro/140398/154581752220181226Employee.png" alt="Gestion Employé" height="50">
+        <h1>Gestion employe</h1>
+        <a href="/" data-translate="home">Accueil</a>
+        <button class="language-selector" data-lang="fr">Français</button>
+        <button class="language-selector" data-lang="en">English</button>
+    </nav>
+
+<h2 data-translate="machineFormTitle">Formulaire Machine</h2>
+
+<form th:object="${machine}" th:action="@{/machine/save}" method="post">
+    <input type="hidden" th:field="*{id}" />
+
+    <label data-translate="machineLabelReference">Référence:</label>
+    <input type="text" th:field="*{reference}" />
+    <br/>
+
+    <label data-translate="machineLabelBrand">Marque:</label>
+    <input type="text" th:field="*{marque}" />
+    <br/>
+
+    <label data-translate="machineLabelPurchaseDate">Date d'Achat:</label>
+    <input type="date" th:field="*{dateAchat}" />
+    <br/>
+
+    <label data-translate="machineLabelPrice">Prix:</label>
+    <input type="text" th:field="*{prix}" />
+    <br/>
+
+    <label data-translate="machineLabelEmployee">Employé:</label>
+    <select th:field="*{employe.id}">
+        <option th:each="employe : ${employes}" th:value="${employe.id}" th:text="${employe.nom + ' ' + employe.prenom}"></option>
+    </select>
+    <br/>
+
+    <button type="submit" data-translate="machineButtonSave">Enregistrer</button>
+</form>
+
+<a href="/machine/list" data-translate="machineListTitle">Retour à la liste des machines</a>
+<script src="/js/translate.js"></script>
+</body>
+</html>

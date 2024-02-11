@@ -1,0 +1,11 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+tr,com.projet.entities,Employe,184,3,32,0,13,2,28,1,12,1
+tr,com.projet.entities,Machine,264,3,48,0,19,2,40,1,16,1
+tr,com.projet.services,MachineService,66,3,0,0,13,1,10,1,10,1
+tr,com.projet.services,EmployeService,30,3,0,0,6,1,5,1,5,1
+tr,com.projet.controllers,HomeController,2,3,0,0,1,1,1,1,1,1
+tr,com.projet.controllers,MachineController,190,3,6,0,47,1,13,1,10,1
+tr,com.projet.controllers,LoginController,18,3,4,0,5,1,4,1,2,1
+tr,com.projet.controllers,EmployeController,51,3,0,0,13,1,5,1,5,1
+tr,com.projet.controllers,MachineController.new PropertyEditorSupport() {...},20,0,0,0,6,0,2,0,2,0
+tr,com.projet,MachineApplication,5,3,0,0,2,1,1,1,1,1

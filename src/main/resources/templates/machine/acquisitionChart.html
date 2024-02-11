@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title data-translate="machineChartTitle">Machine Acquisition Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/css/style3.css" />
+    
+</head>
+<body>
+<nav>
+    <img src="https://images.careerbuilder.vn/employers_pro/140398/154581752220181226Employee.png" alt="Gestion Employé" height="50">
+    <h1 data-translate="machineChartTitle">Gestion employe</h1>
+    <a href="/" data-translate="home">Accueil</a>
+    <button class="language-selector" data-lang="fr">Français</button>
+    <button class="language-selector" data-lang="en">English</button>
+</nav>
+<div class="container">
+    <h2 data-translate="machineChartTitle">Machine Acquisition Chart</h2>
+    <canvas id="acquisitionChart" width="300" height="100"></canvas>
+
+    <script th:inline="javascript">
+        var acquisitionData = /*[[${acquisitionData}]]*/ {};
+        var labels = Object.keys(acquisitionData);
+        var data = Object.values(acquisitionData);
+        var ctx = document.getElementById('acquisitionChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Machines acquises par année',
+                    data: data,
+                    backgroundColor: 'rgba(77, 77, 77, 5.7)',
+                    borderColor: 'rgba(77, 77, 77, 5.7)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+    <script src="/js/translate.js"></script>
+</div>
+</body>
+</html>

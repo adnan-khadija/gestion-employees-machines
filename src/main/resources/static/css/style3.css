@@ -1,0 +1,57 @@
+
+         body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+
+        nav img {
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        nav h1 {
+            margin: 0;
+        }
+
+        nav a, .language-selector {
+            color: #f0e9e9;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .language-selector {
+            background-color: #333;
+        }
+
+        .language-selector:hover {
+            background-color: #555;
+        }
+
+        .container {
+            text-align: center;
+            margin: 20px;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        canvas {
+            width: 80%;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+   

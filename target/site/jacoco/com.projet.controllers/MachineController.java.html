@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MachineController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tr</a> &gt; <a href="index.source.html" class="el_package">com.projet.controllers</a> &gt; <span class="el_source">MachineController.java</span></div><h1>MachineController.java</h1><pre class="source lang-java linenums">package com.projet.controllers;
+
+import com.projet.entities.Employe;
+import com.projet.entities.Machine;
+import com.projet.services.EmployeService;
+import com.projet.services.MachineService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
+
+import java.beans.PropertyEditorSupport;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+@Controller
+@RequestMapping(&quot;/machine&quot;)
+<span class="fc" id="L22">public class MachineController {</span>
+
+    @Autowired
+    private EmployeService employeService;
+
+    @Autowired
+    private MachineService machineService;
+    // Ajouter ces méthodes dans votre MachineController
+
+    @GetMapping(&quot;/listByEmployee&quot;)
+    public String listMachinesByEmployee(@RequestParam(name = &quot;employeeId&quot;, required = false) Long employeeId, Model model) {
+        List&lt;Machine&gt; machines;
+<span class="nc bnc" id="L34" title="All 2 branches missed.">        if (employeeId != null) {</span>
+<span class="nc" id="L35">            machines = machineService.getMachinesByEmployee(employeeId);</span>
+        } else {
+<span class="nc" id="L37">            machines = machineService.findAll();</span>
+        }
+
+<span class="nc" id="L40">        List&lt;Employe&gt; employees = employeService.findAll();</span>
+<span class="nc" id="L41">        model.addAttribute(&quot;machines&quot;, machines);</span>
+<span class="nc" id="L42">        model.addAttribute(&quot;employees&quot;, employees);</span>
+<span class="nc" id="L43">        model.addAttribute(&quot;selectedEmployee&quot;, employeeId);</span>
+
+<span class="nc" id="L45">        return &quot;machine/list&quot;;</span>
+    }
+
+    @GetMapping(&quot;/listByDate&quot;)
+    public String listMachinesByDate(@RequestParam(name = &quot;startDate&quot;, required = false) String startDate,
+                                     @RequestParam(name = &quot;endDate&quot;, required = false) String endDate, Model model) {
+        List&lt;Machine&gt; machines;
+<span class="nc bnc" id="L52" title="All 4 branches missed.">        if (startDate != null &amp;&amp; endDate != null) {</span>
+            // Convertir les dates depuis la chaîne (vous devrez peut-être ajuster cela en fonction du format de date réel)
+<span class="nc" id="L54">            SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);</span>
+            try {
+<span class="nc" id="L56">                Date start = sdf.parse(startDate);</span>
+<span class="nc" id="L57">                Date end = sdf.parse(endDate);</span>
+<span class="nc" id="L58">                machines = machineService.getMachinesBetweenDates(start, end);</span>
+<span class="nc" id="L59">            } catch (ParseException e) {</span>
+                // Gérer l'erreur de conversion de date si nécessaire
+<span class="nc" id="L61">                machines = machineService.findAll();</span>
+<span class="nc" id="L62">            }</span>
+<span class="nc" id="L63">        } else {</span>
+<span class="nc" id="L64">            machines = machineService.findAll();</span>
+        }
+
+<span class="nc" id="L67">        List&lt;Employe&gt; employees = employeService.findAll();</span>
+<span class="nc" id="L68">        model.addAttribute(&quot;machines&quot;, machines);</span>
+<span class="nc" id="L69">        model.addAttribute(&quot;employees&quot;, employees);</span>
+<span class="nc" id="L70">        model.addAttribute(&quot;selectedEmployee&quot;, null);</span>
+
+<span class="nc" id="L72">        return &quot;machine/list&quot;;</span>
+    }
+
+
+    @GetMapping(&quot;/list&quot;)
+    public String listMachines(Model model) {
+<span class="nc" id="L78">        List&lt;Machine&gt; machines = machineService.findAll();</span>
+<span class="nc" id="L79">        List&lt;Employe&gt; employees = employeService.findAll();</span>
+<span class="nc" id="L80">        model.addAttribute(&quot;machines&quot;, machines);</span>
+<span class="nc" id="L81">        model.addAttribute(&quot;employees&quot;, employees);</span>
+<span class="nc" id="L82">        model.addAttribute(&quot;selectedEmployee&quot;, null); // Ajout même s'il est nul</span>
+<span class="nc" id="L83">        return &quot;machine/list&quot;;</span>
+    }
+
+    @GetMapping(&quot;/form&quot;)
+    public String showMachineForm(Model model) {
+<span class="nc" id="L88">        model.addAttribute(&quot;machine&quot;, new Machine());</span>
+<span class="nc" id="L89">        model.addAttribute(&quot;employes&quot;, employeService.findAll());</span>
+<span class="nc" id="L90">        return &quot;machine/form&quot;;</span>
+    }
+
+    @PostMapping(&quot;/save&quot;)
+    public String saveMachine(@ModelAttribute(&quot;machine&quot;) Machine machine) {
+<span class="nc" id="L95">        machineService.create(machine);</span>
+<span class="nc" id="L96">        return &quot;redirect:/machine/list&quot;;</span>
+    }
+
+    @GetMapping(&quot;/edit/{id}&quot;)
+    public String editMachine(@PathVariable Long id, Model model) {
+<span class="nc" id="L101">        Machine machine = machineService.findById(id);</span>
+<span class="nc" id="L102">        model.addAttribute(&quot;machine&quot;, machine);</span>
+<span class="nc" id="L103">        model.addAttribute(&quot;employes&quot;, employeService.findAll());</span>
+<span class="nc" id="L104">        return &quot;machine/form&quot;;</span>
+    }
+
+    @GetMapping(&quot;/delete/{id}&quot;)
+    public String deleteMachine(@PathVariable Long id) {
+<span class="nc" id="L109">        Machine machine = machineService.findById(id);</span>
+<span class="nc" id="L110">        machineService.delete(machine);</span>
+<span class="nc" id="L111">        return &quot;redirect:/machine/list&quot;;</span>
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+<span class="nc" id="L116">        binder.registerCustomEditor(Date.class, new PropertyEditorSupport() {</span>
+            @Override
+            public void setAsText(String text) throws IllegalArgumentException {
+                try {
+<span class="nc" id="L120">                    setValue(new SimpleDateFormat(&quot;yyyy-MM-dd&quot;).parse(text));</span>
+<span class="nc" id="L121">                } catch (ParseException e) {</span>
+<span class="nc" id="L122">                    setValue(null);</span>
+<span class="nc" id="L123">                }</span>
+<span class="nc" id="L124">            }</span>
+        });
+<span class="nc" id="L126">    }</span>
+    @GetMapping(&quot;/acquisitionChart&quot;)
+    @ResponseBody
+    public Map&lt;Integer, Long&gt; getAcquisitionChartData() {
+<span class="nc" id="L130">        return machineService.getMachineCountByYear();</span>
+    }
+
+
+    @GetMapping(&quot;/showAcquisitionChart&quot;)
+    public String showAcquisitionChart(Model model) {
+<span class="nc" id="L136">        Map&lt;Integer, Long&gt; acquisitionData = machineService.getMachineCountByYear();</span>
+<span class="nc" id="L137">        model.addAttribute(&quot;acquisitionData&quot;, acquisitionData);</span>
+<span class="nc" id="L138">        return &quot;machine/acquisitionChart&quot;;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

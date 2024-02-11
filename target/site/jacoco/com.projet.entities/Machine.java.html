@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Machine.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tr</a> &gt; <a href="index.source.html" class="el_package">com.projet.entities</a> &gt; <span class="el_source">Machine.java</span></div><h1>Machine.java</h1><pre class="source lang-java linenums">package com.projet.entities;
+
+
+import jakarta.persistence.*;
+import lombok.Data;
+
+import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
+import java.util.Date;
+
+@Entity
+<span class="nc bnc" id="L12" title="All 48 branches missed.">@Data</span>
+
+public class Machine implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @NotBlank(message = &quot;insérez la référence&quot;)
+    private String reference;
+    @NotBlank(message = &quot;insérez la marque&quot;)
+    private String marque;
+    @NotBlank(message = &quot;choisir une date&quot;)
+    private Date dateAchat;
+    @NotBlank(message = &quot;insérez le prix&quot;)
+    private double prix;
+    @ManyToOne
+    @NotBlank(message = &quot;choisir l'employe&quot;)
+    private Employe employe;
+
+<span class="fc" id="L30">    public Machine() {</span>
+
+<span class="fc" id="L32">    }</span>
+
+    public Long getId() {
+<span class="nc" id="L35">        return id;</span>
+    }
+
+    public void setId(Long id) {
+<span class="nc" id="L39">        this.id = id;</span>
+<span class="nc" id="L40">    }</span>
+
+    public String getReference() {
+<span class="nc" id="L43">        return reference;</span>
+    }
+
+    public void setReference(String reference) {
+<span class="nc" id="L47">        this.reference = reference;</span>
+<span class="nc" id="L48">    }</span>
+
+    public String getMarque() {
+<span class="nc" id="L51">        return marque;</span>
+    }
+
+    public void setMarque(String marque) {
+<span class="nc" id="L55">        this.marque = marque;</span>
+<span class="nc" id="L56">    }</span>
+
+    public Date getDateAchat() {
+<span class="nc" id="L59">        return dateAchat;</span>
+    }
+
+    public void setDateAchat(Date dateAchat) {
+<span class="nc" id="L63">        this.dateAchat = dateAchat;</span>
+<span class="nc" id="L64">    }</span>
+
+    public double getPrix() {
+<span class="nc" id="L67">        return prix;</span>
+    }
+
+    public void setPrix(double prix) {
+<span class="nc" id="L71">        this.prix = prix;</span>
+<span class="nc" id="L72">    }</span>
+
+    public Employe getEmploye() {
+<span class="nc" id="L75">        return employe;</span>
+    }
+
+    public void setEmploye(Employe employe) {
+<span class="nc" id="L79">        this.employe = employe;</span>
+<span class="nc" id="L80">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <title>Liste des Employés</title>
+    <link rel="stylesheet" href="/css/style2.css" />
+<body>
+<nav>
+    <img src="https://images.careerbuilder.vn/employers_pro/140398/154581752220181226Employee.png" alt="Gestion Employé" height="50">
+    <h1>Gestion employe</h1>
+    <a href="/" data-translate="home">Accueil</a>
+    <button class="language-selector" data-lang="fr">Français</button>
+    <button class="language-selector" data-lang="en">English</button>
+</nav>
+<h2 data-translate="employeListTitle">Liste des Employés</h2>
+<table border="1">
+    <tr>f
+        <th>ID</th>
+        <th data-translate="employeLabelName">Nom</th>
+        <th data-translate="employeLabelFirstName">Prénom</th>
+        <th data-translate="employeLabelSalary">Salaire</th>
+        <th data-translate="employeEdit">Modifier</th>
+        <th data-translate="employeDelete'">Supprimer</th>
+    </tr>
+    <tr th:each="employe : ${employes}">
+        <td th:text="${employe.id}"></td>
+        <td th:text="${employe.nom}"></td>
+        <td th:text="${employe.prenom}"></td>
+        <td th:text="${employe.salaire}"></td>
+        <td>
+            <a th:href="@{/employe/edit/{id}(id=${employe.id})}" data-translate="employeEdit">Modifier</a>
+        </td>
+        <td>
+            <a th:href="@{/employe/delete/{id}(id=${employe.id})}" data-translate="employeDelete">Supprimer</a>
+
+        </td>
+    </tr>
+</table>
+
+<a th:href="@{/employe/form}" data-translate="employeAdd">Ajouter un employé</a>
+
+
+<script src="/js/translate.js"></script>
+</body>
+</html>

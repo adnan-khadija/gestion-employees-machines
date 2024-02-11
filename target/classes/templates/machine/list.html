@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <title data-translate="machineListTitle">Liste des Machines</title>
+    <link rel="stylesheet" href="/css/style2.css" />
+    
+</head>
+<body>
+
+<nav>
+    <img src="https://images.careerbuilder.vn/employers_pro/140398/154581752220181226Employee.png" alt="Gestion Employé" height="50">
+    <h1>Gestion employe</h1>
+    <a href="/" data-translate="home">Accueil</a>
+    <button class="language-selector" data-lang="fr">Français</button>
+    <button class="language-selector" data-lang="en">English</button>
+</nav>
+<h2 data-translate="machineListTitle">Liste des Machines</h2>
+
+<div class="filter-container">
+    <form th:action="@{/machine/listByEmployee}" method="get">
+        <div>
+            <h3 data-translate="employeeFilterTitle">Filtrer par employé :</h3>
+            <label for="employeeFilter" data-translate="employeeFilterLabel">Choisir un employé :</label>
+            <select id="employeeFilter" name="employeeId">
+                <option value="" selected data-translate="allEmployees">Tous les employés</option>
+                <option th:each="employee : ${employees}" th:value="${employee.id}" th:text="${employee.nom + ' ' + employee.prenom}"></option>
+            </select>
+            <button type="submit" data-translate="filterButton" class="filter">Filtrer</button>
+        </div>
+    </form>
+
+    <form th:action="@{/machine/listByDate}" method="get">
+        <div>
+            <h3 data-translate="dateFilterTitle">Filtrer par date d'achat :</h3>
+            <label for="startDate" data-translate="startDateLabel">Date de début :</label>
+            <input type="date" id="startDate" name="startDate" placeholder="yyyy-MM-dd">
+            <label for="endDate" data-translate="endDateLabel">Date de fin :</label>
+            <input type="date" id="endDate" name="endDate" placeholder="yyyy-MM-dd">
+            <button type="submit" data-translate="dateFilterButton" class="filter">Filtrer par date</button>
+        </div>
+    </form>
+</div>
+<table border="1">
+    <tr>
+        <th data-translate="idLabel">ID</th>
+        <th data-translate="referenceLabel">Référence</th>
+        <th data-translate="brandLabel">Marque</th>
+        <th data-translate="purchaseDateLabel">Date d'Achat</th>
+        <th data-translate="priceLabel">Prix</th>
+        <th data-translate="employeeLabel">Employé</th>
+        <th data-translate="machineEdit">Modifier</th>
+        <th data-translate="machineDelete">Supprimer</th>
+    </tr>
+
+    <tr th:each="machine : ${machines}">
+        <td th:text="${machine.id}"></td>
+        <td th:text="${machine.reference}"></td>
+        <td th:text="${machine.marque}"></td>
+        <td th:text="${#dates.format(machine.dateAchat, 'dd-MM-yyyy')}"></td>
+        <td th:text="${machine.prix}"></td>
+        <td th:text="${machine.employe.nom + ' ' + machine.employe.prenom}"></td>
+        <td>
+            <a th:href="@{/machine/edit/{id}(id=${machine.id})}" data-translate="machineEdit">Modifier</a>
+    
+        </td>
+        <td>            <a th:href="@{/machine/delete/{id}(id=${machine.id})}" data-translate="machineDelete">Supprimer</a>
+        </td>
+    </tr>
+</table>
+
+<a href="/machine/form" data-translate="machineAdd">Ajouter une machine</a>
+<script src="/js/translate.js"></script>
+</body>
+</html>

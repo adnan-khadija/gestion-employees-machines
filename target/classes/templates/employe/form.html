@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <title>Formulaire Employé</title>
+    <link rel="stylesheet" href="/css/style.css" />  
+</head>
+<body>
+<nav>
+    <img src="https://images.careerbuilder.vn/employers_pro/140398/154581752220181226Employee.png" alt="Gestion Employé" height="50">
+    <h1>Gestion employe</h1>
+    <a href="/" data-translate="home">Accueil</a>
+    <button class="language-selector" data-lang="fr">Français</button>
+    <button class="language-selector" data-lang="en">English</button>
+</nav>
+
+<h2 data-translate="employeFormTitle">Formulaire Employé</h2>
+
+<form th:object="${employe}" th:action="@{/employe/save}" method="post">
+    <input type="hidden" th:field="*{id}" />
+
+    <label data-translate="employeLabelName">Nom:</label>
+    <input type="text" th:field="*{nom}" />
+    <br/>
+    <label data-translate="employeLabelFirstName">Prénom:</label>
+    <input type="text" th:field="*{prenom}" />
+    <br/>
+    <label data-translate="employeLabelSalary">Salaire:</label>
+    <input type="text" th:field="*{salaire}" />
+    <br/>
+    <button type="submit" data-translate="employeButtonSave">Enregistrer</button>
+</form>
+
+<a href="/employe/list" data-translate="employeListTitle">Retour à la liste des employés</a>
+
+<script src="/js/translate.js"></script>
+</body>
+</html>
